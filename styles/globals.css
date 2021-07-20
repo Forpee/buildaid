@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.header{
+    background-image: url(/header.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}

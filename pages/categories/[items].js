@@ -1,10 +1,11 @@
-import Link from "next/link";
-import axios from "axios";
-import { connectToDatabase } from "../util/mongodb";
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function Home({ isConnected }) {
+export default function Items() {
+  const router = useRouter();
+  const [buildItem, setBuildItem] = useState([]);
   const [buildItems, setBuildItems] = useState([]);
   useEffect(() => {
     axios.get("/api/materials").then(function (response) {
@@ -37,39 +38,28 @@ export default function Home({ isConnected }) {
         return arr;
       }, []);
       setBuildItems(testData);
+      setBuildItem(testData[0].child);
     });
   }, []);
 
   return (
-    <div className=''>
-      <Header />
-   <div className='px-8 md:px-0'>
-   <h1 className="text-semibold  text-7xl text-gray-800 text-center py-8 underline">
-        CATEGORIES
-      </h1>
-      {buildItems.map((item, i) => {
-        const str = item.Description.replace(/\s+/g, "-").toLowerCase();
+    <div className='grid-cols-1 py-8 px-8 md:px-0 md:grid-cols-3 grid container mx-auto text-center'>
+      {buildItem.map((item, i) => {
+       
         return (
-          <Link className='' href={`/categories/${str}`} key={i}>
-            <div className="px-16  md:w-1/3 my-16  py-32 mx-auto text-center bg-gray-200 rounded-lg shadow-lg">
-              <a className="text-4xl md:text-8xl cursor-pointer text-center text-gray-700 hover:text-gray-400">
-                {item.Description}
-              </a>
-            </div>
-          </Link>
+          <Link key={i}   href={{
+        pathname:`/subcategories/${item.Description}`,
+        query: {
+            item: item.Description
+           
+        }
+    }} >
+       <div className='p-16 bg-gray-500 m-2'>
+            <a className='font-semibold text-4xl cursor-pointer' key={i}>{item.Description + " "}</a>
+          </div>
+       </Link>
         );
       })}
-   </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase();
-
-  const isConnected = await client.isConnected();
-
-  return {
-    props: { isConnected },
-  };
 }
