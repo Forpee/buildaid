@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
+    <div className='w-screen overflow-x-hidden mr-0 bg-gray-50 pt-4'>
       <Navbar />
       <Component {...pageProps} />
       <Footer/>

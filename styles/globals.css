@@ -7,3 +7,13 @@
     background-position: center;
     background-size:cover;
 }
+html,body{
+    margin: 0;
+    padding: auto;
+    overflow-x: hidden;
+}
+
+.about-info{
+    width: 200px;
+    height:150px;
+}

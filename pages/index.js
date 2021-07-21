@@ -3,7 +3,7 @@ import axios from "axios";
 import { connectToDatabase } from "../util/mongodb";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
-
+import About from "../components/About";
 export default function Home({ isConnected }) {
   const [buildItems, setBuildItems] = useState([]);
   useEffect(() => {
@@ -36,30 +36,45 @@ export default function Home({ isConnected }) {
 
         return arr;
       }, []);
+      testData.push(
+        { Description: "Dummy Data" },
+        { Description: "Dummy Data" },
+        { Description: "Dummy Data" }
+      );
       setBuildItems(testData);
     });
   }, []);
 
   return (
-    <div className=''>
+    <div className="overflow-x-hidden">
       <Header />
-   <div className='px-8 md:px-0'>
-   <h1 className="text-semibold  text-7xl text-gray-800 text-center py-8 underline">
-        CATEGORIES
-      </h1>
-      {buildItems.map((item, i) => {
-        const str = item.Description.replace(/\s+/g, "-").toLowerCase();
-        return (
-          <Link className='' href={`/categories/${str}`} key={i}>
-            <div className="px-16  md:w-1/3 my-16  py-32 mx-auto text-center bg-gray-200 rounded-lg shadow-lg">
-              <a className="text-4xl md:text-8xl cursor-pointer text-center text-gray-700 hover:text-gray-400">
-                {item.Description}
-              </a>
-            </div>
-          </Link>
-        );
-      })}
-   </div>
+      <About />
+      <div className="py-32 px-6 md:px-0">
+        <h1 className="text-semibold   text-6xl text-gray-900 text-center py-8 ">
+          What we provide.
+        </h1>
+        <p className="text-center text-xl text-gray-900">
+          In aliquam sem fringilla ut morbi tincidunt vestibulum mattis augue.
+        </p>
+        <div className='grid grid-cols-2 container mx-auto md:w-1/2 gap-4'>
+          {buildItems.map((item, i) => {
+            const str = item.Description.replace(/\s+/g, "-").toLowerCase();
+            return (
+              <Link className="" href={`/categories/${str}`} key={i}>
+                <div className="px-6 cursor-pointer   my-16  py-8 mx-auto  rounded-lg shadow-lg">
+                  <a className="text-xl md:text-2xl cursor-pointer text-center text-gray-900 hover:text-gray-400">
+                    {item.Description}
+                  </a>
+                  <p className="pt-4 text-gray-400">
+                    Augue eget arcu dictum varius duis at. Suspendisse ultrices
+                    gravida dictum fusce ut placerat orci.
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

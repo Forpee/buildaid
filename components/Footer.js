@@ -9,7 +9,7 @@ export default function Footer() {
           <hr className="border-1 border-gray-400"></hr>
         </div>
         <div className='md:px-0 px-6'>
-          <img src="logo.png" className="mx-auto" alt="logo"></img>
+          <img  src="logo.png" className="mx-auto w-96" alt="logo"></img>
         </div>
         <div className="sm:w-1/4">
           <hr className="border-1 border-gray-400"></hr>
@@ -19,13 +19,13 @@ export default function Footer() {
         <div>
           <ul className="text-center">
             <a href="/">
-              <li> HOME</li>
+              <li> Home</li>
             </a>
             <a href="/project-principles">
-              <li>ABOUT</li>
+              <li>About</li>
             </a>
             <a href="/gallery">
-              <li>MATERIALS</li>
+              <li>Materials</li>
             </a>
           </ul>
         </div>

@@ -6,38 +6,42 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="z-20">
-      <div className="bg-gray-50 flex h-20 shadow-lg justify-between z-20 px-4 lg:px-16">
+      <div className="bg-gray-50 overflow-x-hidden flex h-20 justify-between z-20 px-4 lg:px-16">
         <div className=" flex items-center h-full">
           <a className="flex items-center h-full" href="/">
-            <img className="h-16 my-auto" src="/logo.png" alt="logo" />
+            <img className="h-8 my-auto" src="/logo.png" alt="logo" />
             <div></div>
           </a>
         </div>
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center ">
           <div>
             <a
-              className="font-semibold  mx-6 hover:text-yellow-400 text-gray-700"
+              className="font-medium  mx-6 hover:text-yellow-400 text-gray-500"
               href="/"
             >
-              HOME
+              Home
             </a>
           </div>
           <div>
             <a
-              className="font-semibold mx-6 hover:text-yellow-400 text-gray-700"
+              className="font-medium mx-6 hover:text-yellow-400 text-gray-500"
               href="/"
             >
-              MATERIALS
+              Materials
             </a>
           </div>
           <div>
             <a
-              className="font-semibold mx-6 hover:text-yellow-400 text-gray-700"
+              className="font-medium mx-6 hover:text-yellow-400 text-gray-500"
               href="/"
             >
-             ABOUT
+              Abouts
             </a>
           </div>
+        </div>
+        <div className='hidden md:flex my-auto'>
+          <button className="bg-gray-900 font-medium px-10 rounded-2xl py-2 text-white mx-2 ">Quote </button>
+          <button className="border-gray-900 border font-medium px-8 rounded-2xl py-2 text-black mx-2">Contact </button>
         </div>
 
         <div className="flex items-center md:hidden">
@@ -79,7 +83,7 @@ export default function Navbar() {
               className="font-semibold   hover:text-yellow-400 text-gray-700"
               href="/"
             >
-            MATERIALS
+              MATERIALS
             </a>
           </div>
           <div className="py-1 px-4">
@@ -87,7 +91,7 @@ export default function Navbar() {
               className="font-semibold   hover:text-yellow-400 text-gray-700"
               href="/"
             >
-           ABOUT
+              ABOUT
             </a>
           </div>
         </div>
