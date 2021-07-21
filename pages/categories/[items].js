@@ -3,7 +3,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Items() {
+export default function Items(props) {
+  console.log(props.category);
   const router = useRouter();
   const [buildItem, setBuildItem] = useState([]);
   const [buildItems, setBuildItems] = useState([]);
@@ -43,23 +44,49 @@ export default function Items() {
   }, []);
 
   return (
-    <div className='grid-cols-1 py-8 px-8 md:px-0 md:grid-cols-3 grid container mx-auto text-center'>
-      {buildItem.map((item, i) => {
-       
-        return (
-          <Link key={i}   href={{
-        pathname:`/subcategories/${item.Description}`,
-        query: {
-            item: item.Description
-           
-        }
-    }} >
-       <div className='p-16 bg-gray-500 m-2'>
-            <a className='font-semibold text-4xl cursor-pointer' key={i}>{item.Description + " "}</a>
-          </div>
-       </Link>
-        );
-      })}
+    <div>
+      <div className=" container mx-auto  font-semibold flex">
+        <div className=''>
+          <a className='hover:text-gray-400' href='/'>Home/</a>
+        </div>
+        <div>
+          <a className='hover:text-gray-400' href={`/category/${props.categories}`}>{props.categories}</a>
+        </div>
+      </div>
+      <h1  className='text-6xl font-semibold text-center py-8'>{props.categories}</h1>
+      <p className='text-gray-600 text-center w-96 mx-auto'> Lorem ipsum dolor sit amet,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+      <div className="grid-cols-1 py-8 gap-8 md:px-64 md:grid-cols-3 grid container  mx-auto text-center">
+        {buildItem.map((item, i) => {
+          return (
+            <Link
+              key={i}
+              href={{
+                pathname: `/subcategories/${item.Description}`,
+                query: {
+                  item: item.Description,
+                  categories: props.categories
+                },
+              }}
+            >
+              <div className=" shadow-lg py-8 bg-gray-900 text-gray-100 rounded-3xl m-2">
+                <a className="font-semibold text-2xl cursor-pointer" key={i}>
+                  {item.Description + " "}
+                </a>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
+}
+export async function getServerSideProps(context) {
+  // returns { id: episode.itunes.episode, title: episode.title}
+
+  //you can make DB queries using the data in context.query
+  return {
+    props: {
+      categories: context.query.categories, //pass it to the page props
+    },
+  };
 }
