@@ -35,7 +35,7 @@ export default function Navbar() {
               className="font-medium mx-6 hover:text-yellow-400 text-gray-500"
               href="/"
             >
-              Abouts
+              About
             </a>
           </div>
         </div>
@@ -69,10 +69,10 @@ export default function Navbar() {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <div className=" md:hidden shadow-sm bg-yellow-50 border border-t-0 border-l-0 border-r-0 border-yellow-300">
+        <div className=" md:hidden shadow-sm bg-gray-50 border border-t-0 border-l-0 border-r-0 border-gray-300">
           <div className="py-1 px-4">
             <a
-              className="font-semibold   hover:text-yellow-400 text-gray-700"
+              className="font-semibold   hover:text-gray-400 text-gray-700"
               href="/"
             >
               HOME

@@ -37,9 +37,9 @@ export default function Home({ isConnected }) {
         return arr;
       }, []);
       testData.push(
-        { Description: "Dummy Data" },
-        { Description: "Dummy Data" },
-        { Description: "Dummy Data" }
+        { Description: "Other Materials" },
+        { Description: "More Materials" },
+        { Description: "Building Materials" }
       );
       setBuildItems(testData);
     });
@@ -62,7 +62,7 @@ export default function Home({ isConnected }) {
             return (
               <Link className="" href={`/categories/${str}`} key={i}>
                 <div className="px-6 cursor-pointer   my-16  py-8 mx-auto  rounded-lg shadow-lg">
-                  <a className="text-xl md:text-2xl cursor-pointer text-center text-gray-900 hover:text-gray-400">
+                  <a className="text-xl uppercase md:text-2xl cursor-pointer text-center text-gray-900 hover:text-gray-400">
                     {item.Description}
                   </a>
                   <p className="pt-4 text-gray-400">
