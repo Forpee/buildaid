@@ -9,8 +9,7 @@ export default function Quote() {
 
   function sendEmail(e) {
     const orderRef = prodArr.map((item) => {
-        
-      return orderRef + `,${item.Description} X ${item.count}`;
+      return `${item.Description} X ${item.count}`;
     });
     e.preventDefault();
     const templateParams = {
@@ -61,13 +60,12 @@ export default function Quote() {
   useEffect(() => {
     axios.get("/api/materials").then(function (response) {
       const data = response.data;
-      cart.forEach((item) => {
-        item.forEach((product) => {
-          let obj = data.find((o) => o._id === product.id);
-          obj = { ...obj, count: product.count };
+      console.log(cart.flat(Infinity));
+      cart.flat(Infinity).forEach((product) => {
+        let obj = data.find((o) => o._id === product.id);
+        obj = { ...obj, count: product.count };
 
-          setProdArr((prodArr) => [...prodArr, obj]);
-        });
+        setProdArr((prodArr) => [...prodArr, obj]);
       });
     });
   }, [cart]);
