@@ -68,7 +68,7 @@ export default function Items(props) {
                 },
               }}
             >
-              <div className=" shadow-lg py-8 bg-gray-900 text-gray-100 rounded-3xl m-2">
+              <div className=" shadow-lg py-8 bg-gray-900 text-gray-100 rounded-lg m-2">
                 <a className="font-semibold text-2xl cursor-pointer" key={i}>
                   {item.Description + " "}
                 </a>

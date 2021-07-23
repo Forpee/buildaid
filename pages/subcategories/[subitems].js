@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {useStore} from '../index'
 export async function getServerSideProps(context) {
-  console.log(context.query);
+  
   // returns { id: episode.itunes.episode, title: episode.title}
 
   //you can make DB queries using the data in context.query
@@ -16,6 +18,9 @@ export async function getServerSideProps(context) {
 }
 
 export default function Items(props) {
+  const addToCart = useStore(state => state.addToCart);
+  const cart = useStore(state => state.cart);
+  console.log(cart)
   const router = useRouter();
   const [buildItem, setBuildItem] = useState([]);
   const [buildItems, setBuildItems] = useState([]);
@@ -51,7 +56,7 @@ export default function Items(props) {
       }, []);
       setBuildItems(testData);
       let obj = testData[0].child.find((o) => o.Description === props.item);
-      console.log(obj);
+    
       setBuildItem(obj.child);
     });
   }, []);
@@ -87,36 +92,30 @@ export default function Items(props) {
           </a>
         </div>
       </div>
-      <h1 className="text-6xl font-semibold text-center py-8">
-        {props.item}
-      </h1>
+      <h1 className="text-6xl font-semibold text-center py-8">{props.item}</h1>
       <p className="text-gray-600 text-center w-96 mx-auto">
         {" "}
         Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore
         et dolore magna aliqua.{" "}
       </p>
 
-      <div className="grid-cols-1 py-8 md:grid-cols-3 grid container mx-auto text-center">
+      <div className="grid-cols-1 py-8 md:grid-cols-3 grid container mx-auto  text-center">
         {buildItem.map((item, i) => {
           return (
-            <Link
+            <div
               key={i}
-              href={{
-                pathname: `/`,
-              }}
+              className="py-8 bg-gray-900 rounded-xl cursor-pointer text-gray-100 m-2"
             >
-              <div className="py-8 bg-gray-900 rounded-3xl text-gray-100 m-2">
-                <a
-                  className="text-4xl text-gray-100 cursor pointer font-semibold"
-                  key={i}
-                >
-                  {item.Description + " "}
-                </a>
-                <h1 className="my-3 text-2xl">
-                  {item.Unit} {" : "}R {item.Price}
-                </h1>
-              </div>
-            </Link>
+              <h1 className="text-4xl text-gray-100 cursor pointer font-semibold">
+                {item.Description + " "}
+              </h1>
+              <h1 className="my-3 text-2xl">
+                {item.Unit.charAt(0).toUpperCase() + item.Unit.slice(1)} {" : "}R {item.Price}
+              </h1>
+              <button onClick={()=>{addToCart(item._id)}} className="text-center text-black rounded-3xl bg-gray-50 px-4 font-semibold mt-6 mb-2 py-2">
+                Add to Quote <ShoppingCartIcon />{" "}
+              </button>
+            </div>
           );
         })}
       </div>

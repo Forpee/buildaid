@@ -9,7 +9,7 @@ export default function Footer() {
           <hr className="border-1 border-gray-400"></hr>
         </div>
         <div className='md:px-0 px-6'>
-          <img  src="logo.png" className="mx-auto w-96" alt="logo"></img>
+          <img  src="/logo.png" className="mx-auto w-96" alt="logo"></img>
         </div>
         <div className="sm:w-1/4">
           <hr className="border-1 border-gray-400"></hr>

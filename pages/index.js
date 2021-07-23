@@ -4,11 +4,61 @@ import { connectToDatabase } from "../util/mongodb";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import About from "../components/About";
+import create from "zustand";
+import { persist } from "zustand/middleware";
+export const useStore = create(
+  persist((set) => ({
+    cart: [],
+    addToCart: (id) =>
+      set((state) => {
+        const isPresent = state.cart.find((product) => product.id === id);
+        if (!isPresent) {
+          return {
+            ...state,
+            cart: [...state.cart, { id, count: 1 }],
+          };
+        }
+        const updatedCart = state.cart.map((product) =>
+          product.id === id ? { ...product, count: product.count + 1 } : product
+        );
+        return {
+          ...state,
+          cart: [updatedCart],
+        };
+      }),
+    removeFromCart: (id) =>
+      set((state) => {
+        const isPresent = state.cart.findIndex((product) => product.id === id);
+
+        if (isPresent === -1) {
+          return {
+            ...state,
+          };
+        }
+
+        const updatedCart = state.cart
+          .map((product) =>
+            product.id === id
+              ? { ...product, count: Math.max(product.count - 1, 0) }
+              : product
+          )
+          .filter((product) => product.count);
+
+        return {
+          ...state,
+          cart: updatedCart,
+        };
+      }),
+  }))
+);
 export default function Home({ isConnected }) {
+
+
   const [buildItems, setBuildItems] = useState([]);
   useEffect(() => {
     axios.get("/api/materials").then(function (response) {
       const data = response.data;
+
       const newData = data.reduce((arr, el) => {
         if (el.Level === "1") {
           // If el is pushed directly it would be a reference
@@ -56,7 +106,7 @@ export default function Home({ isConnected }) {
         <p className="text-center text-xl text-gray-900">
           In aliquam sem fringilla ut morbi tincidunt vestibulum mattis augue.
         </p>
-        <div className='grid grid-cols-2 container mx-auto md:w-1/2 gap-4'>
+        <div className="grid grid-cols-2 container mx-auto md:w-1/2 gap-4">
           {buildItems.map((item, i) => {
             const str = item.Description.replace(/\s+/g, "-").toLowerCase();
             return (

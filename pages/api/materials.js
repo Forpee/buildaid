@@ -4,7 +4,7 @@ export default async (req, res) => {
   const materials = await db
     .collection("Builders")
     .find({})
-    .filter({})
+    .sort({ "_id": 1 })
     .toArray();
   res.json(materials);
 };

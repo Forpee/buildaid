@@ -2,6 +2,7 @@ import { useState } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import { Transition } from "@headlessui/react";
+import Link from 'next/link'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -40,7 +41,12 @@ export default function Navbar() {
           </div>
         </div>
         <div className='hidden md:flex my-auto'>
-          <button className="bg-gray-900 font-medium px-10 rounded-2xl py-2 text-white mx-2 ">Quote </button>
+          <button className="bg-gray-900 font-medium px-10 rounded-2xl py-2 text-white mx-2 ">
+          <Link href='/quote'>
+            <a>Quote</a>
+          </Link>
+          
+           </button>
           <button className="border-gray-900 border font-medium px-8 rounded-2xl py-2 text-black mx-2">Contact </button>
         </div>
 
