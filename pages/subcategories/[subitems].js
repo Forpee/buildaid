@@ -3,9 +3,9 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {useStore} from '../index'
+import { useStore } from "../index";
+import Snackbar from "@material-ui/core/Snackbar";
 export async function getServerSideProps(context) {
-  
   // returns { id: episode.itunes.episode, title: episode.title}
 
   //you can make DB queries using the data in context.query
@@ -18,9 +18,22 @@ export async function getServerSideProps(context) {
 }
 
 export default function Items(props) {
-  const addToCart = useStore(state => state.addToCart);
-  const cart = useStore(state => state.cart);
-  console.log(cart)
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const addToCart = useStore((state) => state.addToCart);
+  const cart = useStore((state) => state.cart);
+  console.log(cart);
   const router = useRouter();
   const [buildItem, setBuildItem] = useState([]);
   const [buildItems, setBuildItems] = useState([]);
@@ -56,7 +69,7 @@ export default function Items(props) {
       }, []);
       setBuildItems(testData);
       let obj = testData[0].child.find((o) => o.Description === props.item);
-    
+
       setBuildItem(obj.child);
     });
   }, []);
@@ -110,11 +123,26 @@ export default function Items(props) {
                 {item.Description + " "}
               </h1>
               <h1 className="my-3 text-2xl">
-                {item.Unit.charAt(0).toUpperCase() + item.Unit.slice(1)} {" : "}R {item.Price}
+                {item.Unit.charAt(0).toUpperCase() + item.Unit.slice(1)} {" : "}
+                R {item.Price}
               </h1>
-              <button onClick={()=>{addToCart(item._id)}} className="text-center text-black rounded-3xl bg-gray-50 px-4 font-semibold mt-6 mb-2 py-2">
+              <button
+                onClick={() => {
+                  addToCart(item._id);
+                  handleClick();
+                }}
+                className="text-center hover:text-white hover:bg-black border hover:border-white text-black rounded-3xl bg-gray-50 px-4 font-semibold mt-6 mb-2 py-2"
+              >
                 Add to Quote <ShoppingCartIcon />{" "}
               </button>
+              <Snackbar
+                open={open}
+                autoHideDuration={1000}
+                onClose={handleClose}
+                message={`Added`}
+              />
+            
+            
             </div>
           );
         })}
