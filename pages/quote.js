@@ -1,6 +1,7 @@
 import { useStore } from "./index";
 import * as emailjs from "emailjs-com";
 import swal from "sweetalert";
+import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 export default function Quote() {
@@ -60,7 +61,7 @@ export default function Quote() {
   useEffect(() => {
     axios.get("/api/materials").then(function (response) {
       const data = response.data;
-      console.log(cart.flat(Infinity));
+    
       cart.flat(Infinity).forEach((product) => {
         let obj = data.find((o) => o._id === product.id);
         obj = { ...obj, count: product.count };
@@ -69,14 +70,27 @@ export default function Quote() {
       });
     });
   }, [cart]);
+  const removeFromCart = useStore((state) => state.removeFromCart);
+  const router = useRouter();
   return (
-    <div className="text-center ">
+    <div className="text-center">
       {prodArr.map((item, key) => {
         return (
-          <div className="my-8" key={key}>
+          <div className="my-8 flex justify-center" key={key}>
             <h1 ref={messageRef}>
               {item.Description} X{item.count}
             </h1>
+            <button
+              className="rounded-full  w-6 h-6 mx-4 bg-gray-900 text-white"
+              onClick={() => {
+                removeFromCart(item._id);
+                router.reload();
+
+                //router.replace('/quote');
+              }}
+            >
+              -
+            </button>
           </div>
         );
       })}

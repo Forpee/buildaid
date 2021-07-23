@@ -41,7 +41,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className='hidden md:flex my-auto'>
-          <button className="bg-gray-900 font-medium px-10 rounded-2xl py-2 text-white mx-2 ">
+          <button className="bg-gray-900 border border-gray-900 hover:bg-white hover:text-black font-medium px-10 rounded-2xl py-2 text-white mx-2 ">
           <Link href='/quote'>
             <a>Quote</a>
           </Link>

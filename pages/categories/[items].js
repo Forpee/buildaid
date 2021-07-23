@@ -59,6 +59,7 @@ export default function Items(props) {
         {buildItem.map((item, i) => {
           return (
             <Link
+         
               key={i}
               href={{
                 pathname: `/subcategories/${item.Description}`,
@@ -68,7 +69,7 @@ export default function Items(props) {
                 },
               }}
             >
-              <div className=" shadow-lg py-8 bg-gray-900 text-gray-100 rounded-lg m-2">
+              <div className=" shadow-lg py-8 border hover:bg-white border-black  hover:text-black bg-gray-900 text-gray-100 rounded-lg m-2">
                 <a className="font-semibold text-2xl cursor-pointer" key={i}>
                   {item.Description + " "}
                 </a>

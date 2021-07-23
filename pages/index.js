@@ -28,7 +28,9 @@ export const useStore = create(
       }),
     removeFromCart: (id) =>
       set((state) => {
-        const isPresent = state.cart.findIndex((product) => product.id === id);
+        const isPresent = state.cart
+          .flat(Infinity)
+          .findIndex((product) => product.id === id);
 
         if (isPresent === -1) {
           return {
@@ -37,6 +39,7 @@ export const useStore = create(
         }
 
         const updatedCart = state.cart
+          .flat(Infinity)
           .map((product) =>
             product.id === id
               ? { ...product, count: Math.max(product.count - 1, 0) }
@@ -52,8 +55,6 @@ export const useStore = create(
   }))
 );
 export default function Home({ isConnected }) {
-
-
   const [buildItems, setBuildItems] = useState([]);
   useEffect(() => {
     axios.get("/api/materials").then(function (response) {
