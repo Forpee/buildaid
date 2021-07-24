@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Quote() {
   const emailRef = useRef();
   const messageRef = useRef();
-  const [refNum, setRefNum]
+  const [refNum, setRefNum] = useState()
   function sendEmail(e) {
    const order = {order: prodArr} 
    axios
