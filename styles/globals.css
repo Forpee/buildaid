@@ -1,22 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.header{
-    background-image: url(/header.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
+.header {
+  background-image: url(/header.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-html,body{
-    margin: 0;
-    padding: auto;
-    overflow-x: hidden;
+html,
+body {
+  margin: 0;
+  padding: auto;
+  overflow-x: hidden;
+
 }
 
-.about-info{
-    width: 200px;
-    height:150px;
+.about-info {
+  width: 200px;
+  height: 150px;
 }
-.h-screen\/2{
-    height:50vh;
+.min-h-screen\/2 {
+  min-height: 50vh;
 }
+

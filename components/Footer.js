@@ -3,7 +3,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import BookIcon from "@material-ui/icons/Book";
 export default function Footer() {
   return (
-    <footer className=" bg-gray-50 overflow-hidden pt-16">
+    <footer className=" bg-gray-50 mt-auto overflow-hidden pt-16">
       <div className="w-screen sm:flex justify-evenly">
         <div className=" sm:w-1/4">
           <hr className="border-1 border-gray-400"></hr>

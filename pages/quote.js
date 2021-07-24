@@ -7,16 +7,26 @@ import axios from "axios";
 export default function Quote() {
   const emailRef = useRef();
   const messageRef = useRef();
-
+  const [refNum, setRefNum]
   function sendEmail(e) {
+   const order = {order: prodArr} 
+   axios
+   .post("/api/order", order)
+   .then(function (response) {
+     setRefNum(response.data);
+   });
+
     const orderRef = prodArr.map((item) => {
-      return `${item.Description} X ${item.count}`;
+      return `
+      ${item.Description} X${item.count}
+      `;
     });
     e.preventDefault();
     const templateParams = {
       to_email: emailRef.current.value,
       from_name: "BUILD AID",
       order: orderRef,
+      refNum: refNum
     };
     function ValidateEmail(email) {
       var emailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
@@ -50,18 +60,22 @@ export default function Quote() {
             console.log(error.text);
           }
         );
-      swal("Thank You! Your message has been recieved");
+      swal("Thank You! Your order has been recieved").then(() => {
+        clearCart();
+        router.reload();
+      });
     }
   }
 
   const [email, setEmail] = useState("");
   const [prodArr, setProdArr] = useState([]);
   const cart = useStore((state) => state.cart);
+  const clearCart = useStore((state) => state.clearCart);
 
   useEffect(() => {
     axios.get("/api/materials").then(function (response) {
       const data = response.data;
-    
+
       cart.flat(Infinity).forEach((product) => {
         let obj = data.find((o) => o._id === product.id);
         obj = { ...obj, count: product.count };
@@ -73,7 +87,7 @@ export default function Quote() {
   const removeFromCart = useStore((state) => state.removeFromCart);
   const router = useRouter();
   return (
-    <div className="text-center">
+    <div className="text-center min-h-screen/2">
       {prodArr.map((item, key) => {
         return (
           <div className="my-8 flex justify-center" key={key}>
@@ -104,7 +118,7 @@ export default function Quote() {
         <button
           type="submit"
           value="Send"
-          className="bg-gray-900 my-8 text-gray-50 px-4 py-2 rounded-3xl"
+          className="bg-gray-900 border border-gray-900 hover:bg-white hover:text-gray-900 font-medium my-8 text-gray-50 px-4 py-2 rounded-3xl"
         >
           Get Quotation
         </button>

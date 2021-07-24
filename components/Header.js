@@ -7,6 +7,10 @@ export default function Header() {
         <div className="bg-gray-200 rounded-3xl h-8 w-96"></div>
 
         <h1 className="font-medium text-7xl pt-8">Rentals</h1>
+        <p className="text-gray-600 mt-4 px-2">
+          Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua.{" "}
+        </p>
         <Link
           className=""
           href={`/categories/plant-hire`}
@@ -17,15 +21,15 @@ export default function Header() {
             },
           }}
         >
-          <div className="px-6 cursor-pointer hover:bg-gray-800 bg-gray-900 my-16  py-8 mx-auto  rounded-lg shadow-lg">
-            <a className="text-xl uppercase md:text-2xl cursor-pointer text-center text-gray-100    hover:text-gray-400">
+          <div className="px-6 cursor-pointer hover:bg-gray-50 border border-gray-900 text-white hover:text-black bg-gray-900 my-8  py-8 mx-auto  rounded-lg shadow-lg">
+            <a className="text-xl uppercase md:text-2xl cursor-pointer text-center  ">
               Plant Hire
             </a>
-            <p className="pt-4 text-gray-400">
+            <p className="pt-4 ">
               Augue eget arcu dictum varius duis at. Suspendisse ultrices
               gravida dictum fusce ut placerat orci.
             </p>
-            <ArrowForwardIosIcon className="text-white mt-4 " />
+            <ArrowForwardIosIcon className="mt-4 " />
           </div>
         </Link>
       </div>

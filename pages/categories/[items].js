@@ -44,7 +44,7 @@ export default function Items(props) {
   }, []);
 
   return (
-    <div>
+    <div className='min-h-screen/2'>
       <div className=" container mx-auto  font-semibold flex">
         <div className=''>
           <a className='hover:text-gray-400' href='/'>Home/</a>

@@ -52,6 +52,10 @@ export const useStore = create(
           cart: updatedCart,
         };
       }),
+    clearCart: () =>
+      set((state) => {
+        return { ...state, cart: [] };
+      }),
   }))
 );
 export default function Home({ isConnected }) {
