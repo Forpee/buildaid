@@ -6,13 +6,13 @@ export default async (req, res) => {
 
     const mat = await db
       .collection("Orders")
-      .find({ refNum: req.body.num })
+      .find({ refNum: parseFloat(req.body.num) })
       .count();
     if (mat > 0) {
       await db
         .collection("Orders")
         .findOneAndUpdate(
-          { refNum: req.body.num },
+          { refNum: parseFloat(req.body.num) },
           { $set: { confirmation: true } }
         );
       res.json(true);
