@@ -7,14 +7,11 @@ import axios from "axios";
 export default function Quote() {
   const emailRef = useRef();
   const messageRef = useRef();
-  const [refNum, setRefNum] = useState()
+  const [refNum, setRefNum] = useState();
   function sendEmail(e) {
-   const order = {order: prodArr} 
-   axios
-   .post("/api/order", order)
-   .then(function (response) {
-     setRefNum(response.data);
-   });
+    const referenceID = Math.floor(Math.random() * 100000000000) + 100000000000;
+    const order = { order: prodArr, refNum: referenceID, confirmed: false};
+    axios.post("/api/order", order)
 
     const orderRef = prodArr.map((item) => {
       return `
@@ -22,11 +19,12 @@ export default function Quote() {
       `;
     });
     e.preventDefault();
+
     const templateParams = {
       to_email: emailRef.current.value,
       from_name: "BUILD AID",
       order: orderRef,
-      refNum: refNum
+      refNum: referenceID,
     };
     function ValidateEmail(email) {
       var emailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(

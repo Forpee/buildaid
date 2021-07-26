@@ -1,22 +1,25 @@
 import axios from "axios";
+import { useState } from "react";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 export default function Confirmation(props) {
-  console.log(props.refNum);
+  const [loading, setLoading] = useState(true);
+  axios.post("/api/confirmOrder", {num: props.refNum} ).then((res) => {
+    setLoading(!res.data)
+
+  })
 
   return (
-    <div className="min-h-screen/2 flex">
-      <button
-        className="px-6  py-2 bg-black text-white hover:bg-blue-900 rounded-3xl text-center m-auto"
-        onClick={() => {
-          axios
-            .post("/api/order", { firstName: "Not Not Fred", lastName: "Flintstone" })
-            .then(function (response) {
-              console.log(response.data);
-            });
+    <div className="min-h-screen/2 flex justify-center items-center">
+      {loading ? (
+        <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+      ) : (
+        <div>
+          <h1 className=' text-xl text-center  font-semibold'>You Order with reference number {props.refNum} as been confimed!</h1>
          
-        }}
-      >
-        Post
-      </button>
+        </div>
+
+      )}
     </div>
   );
 }
